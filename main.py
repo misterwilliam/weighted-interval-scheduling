@@ -1,6 +1,6 @@
 import unittest
 
-from typing import List
+from typing import List, Set
 
 
 class Interval:
@@ -23,37 +23,58 @@ class Interval:
         return "Interval(%i, %i, %f)" % (self.begin, self.end, self.weight)
 
 
-def GetIntervalsBefore(intervals: List[Interval], beforeInterval: Interval):
+def GetFirstOverlappingIntervalIndex(intervals: List[Interval],
+                                     withInterval: Interval) -> int:
     # Assumes |intervals| are sorted by end time
-    cutoffTime = beforeInterval.begin
-    retValue = []
-    for interval in intervals:
-        if interval.end < cutoffTime:
-            retValue.append(interval)
+    cutoffTime = withInterval.begin
+    i = 0
+    while i < len(intervals):
+        if intervals[i].end >= cutoffTime:
+            return i
+        i += 1
+    else:
+        return len(intervals)
+
+
+def memoize(f):
+    cache = {}
+    def wrapper(*args):
+        if args in cache:
+            return cache[args]
         else:
-            break
-    return retValue
+            answer = f(*args)
+            cache[args] = answer
+            return answer
+    return wrapper
 
 
 def GetBestSchedule(intervals: List[Interval]) -> (float, List[Interval]):
-    def RecursiveBody(intervals: List[Interval]) -> (float, List[Interval]):
-        if len(intervals) == 0:
-            return (0.0, [])
-        if len(intervals) == 1:
-            return (intervals[0].weight, intervals)
-        else:
-            hasLastInterval = RecursiveBody(GetIntervalsBefore(intervals, intervals[-1]))
-            hasLastInterval = (hasLastInterval[0] + intervals[-1].weight,
-                               hasLastInterval[1] + [intervals[-1]])
-            notHasLastInterval = RecursiveBody(intervals[:-1])
-            return max(hasLastInterval, notHasLastInterval, key=lambda tuple: tuple[0])
-
     intervals.sort(key=lambda interval: interval.end)
 
-    return RecursiveBody(intervals)
+    @memoize
+    def RecursiveBodyByIndex(index) -> (float, List[int]):
+        # Memoize converts from an exponential runtime to a polynomial because it is now
+        # a dynamic programming based solution
+        if index == -1:
+            return (0, [])
+        elif index == 0:
+            return (intervals[index].weight, [0])
+        else:
+            lastInterval = intervals[index]
+            firstOverlappingIndex = GetFirstOverlappingIntervalIndex(intervals,
+                                                                     lastInterval)
+            withoutLastIntervalScore, withoutLastIntervalSchedule = \
+                RecursiveBodyByIndex(firstOverlappingIndex - 1)
+            hasLastInterval = (withoutLastIntervalScore + lastInterval.weight,
+                               withoutLastIntervalSchedule + [index])
+            notHasLastInterval = RecursiveBodyByIndex(index - 1)
+            return max(hasLastInterval, notHasLastInterval, key=lambda tuple: tuple[0])
+
+    weight, indices = RecursiveBodyByIndex(len(intervals) - 1)
+    return weight, [intervals[i] for i in indices]
 
 
-class GetIntervalsBeforeTest(unittest.TestCase):
+class GetFirstOverlappingIntervalIndexTest(unittest.TestCase):
 
     def test_basic(self):
         data = [
@@ -61,8 +82,17 @@ class GetIntervalsBeforeTest(unittest.TestCase):
             Interval(2, 6, 1.0),
             Interval(5, 10, 1.0)
         ]
-        answer = GetIntervalsBefore(data, Interval(5, 10, 1.0))
-        self.assertEqual(answer, [Interval(1, 3, 1.0)])
+        answer = GetFirstOverlappingIntervalIndex(data, Interval(5, 10, 1.0))
+        self.assertEqual(answer, 1)
+
+    def test_hitsEnd(self):
+        data = [
+            Interval(1, 3, 1.0),
+            Interval(2, 6, 1.0),
+            Interval(5, 7, 1.0)
+        ]
+        answer = GetFirstOverlappingIntervalIndex(data, Interval(8, 10, 1.0))
+        self.assertEqual(answer, 3)
 
 
 class MyTests(unittest.TestCase):
