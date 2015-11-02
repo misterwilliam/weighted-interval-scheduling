@@ -1,0 +1,16 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/william/Workspace/Programming/weighted-interval-scheduling"
+		}
+	],
+  "settings":
+  {
+    "tab_size": 4
+  },
+  "SublimeLinter":
+  {
+    "@python": 3
+  }
+}
