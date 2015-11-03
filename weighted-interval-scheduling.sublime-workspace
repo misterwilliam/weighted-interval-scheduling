@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"None",
+				"GetLastNonOverlappingIntervalIndex"
+			],
+			[
 				"end",
 				"endAtTimestamps"
 			],
@@ -510,10 +514,6 @@
 			[
 				"search",
 				"searchEndPrefix"
-			],
-			[
-				"even",
-				"eventArgs"
 			]
 		]
 	},
@@ -523,25 +523,33 @@
 			"file": "main.py",
 			"settings":
 			{
-				"buffer_size": 77,
+				"buffer_size": 3923,
 				"line_ending": "Unix",
 				"name": "def GetBestSchedule(intervals: List[Interval]) ->"
+			}
+		},
+		{
+			"file": "weighted-interval-scheduling.sublime-project",
+			"settings":
+			{
+				"buffer_size": 195,
+				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "Packages/User/npm-test.sublime-build",
 	"command_palette":
 	{
-		"height": 400.0,
+		"height": 131.0,
 		"selected_items":
 		[
 			[
-				"up",
-				"Package Control: Upgrade Package"
-			],
-			[
 				"install",
 				"Package Control: Install Package"
+			],
+			[
+				"up",
+				"Package Control: Upgrade Package"
 			],
 			[
 				"package control: ",
@@ -576,7 +584,7 @@
 				"Set Syntax: HTML"
 			]
 		],
-		"width": 475.0
+		"width": 457.0
 	},
 	"console":
 	{
@@ -593,6 +601,7 @@
 	},
 	"file_history":
 	[
+		"/Users/william/Library/Application Support/Sublime Text 2/Packages/User/Python.sublime-settings",
 		"/Users/william/Workspace/Programming/HiHiHi/tests/notLoggedIn-buffer-test.js",
 		"/Users/william/Workspace/Programming/HiHiHi/www/src/utils/userActivityLevelReporter.js",
 		"/Users/william/Workspace/Programming/HiHiHi/utils/react/collectionSync.js",
@@ -719,8 +728,7 @@
 		"/Users/william/Workspace/Programming/HiHiHi/utils/react/fbModelSync.js",
 		"/Users/william/Workspace/Programming/HiHiHi/www/src/utils/idlenessMonitor.js",
 		"/Users/william/Workspace/Programming/HiHiHi/www/src/utils/appVisibility.js",
-		"/Users/william/Workspace/Programming/HiHiHi/node_modules/bower/lib/commands/link.js",
-		"/Users/william/Workspace/Programming/HiHiHi/www/src/models/readMessageStore.js"
+		"/Users/william/Workspace/Programming/HiHiHi/node_modules/bower/lib/commands/link.js"
 	],
 	"find":
 	{
@@ -750,6 +758,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"hasLastInterval",
+			"candidate_interval_indices",
+			"endIndex",
+			"candidate_interval_indices",
+			"Set",
+			"intervals",
+			"withInterval",
 			"DFS",
 			"isLeft",
 			", willEnterNode",
@@ -870,14 +885,7 @@
 			"getmoremessages",
 			"registerforoldermessages",
 			"console.log",
-			"older",
-			"40",
-			"registerforcollectionupdates",
-			"handlecollection",
-			"getmoremessages",
-			"scheduleupdate",
-			"endstatus",
-			"registerforoldermessages"
+			"older"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -918,15 +926,15 @@
 					"file": "main.py",
 					"settings":
 					{
-						"buffer_size": 77,
+						"buffer_size": 3923,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								77,
-								77
+								2138,
+								2138
 							]
 						],
 						"settings":
@@ -1023,6 +1031,122 @@
 							},
 							"sublimelinter_wrap_find": true,
 							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 218.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "weighted-interval-scheduling.sublime-project",
+					"settings":
+					{
+						"buffer_size": 195,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								171,
+								171
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"devel": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": "load-save",
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
